@@ -6,7 +6,7 @@ import os
 from PIL import Image
 import cv2
 
-data_path = 'examp2.txt'
+data_path = 'examp17.txt'
 main_dir = 'D:\\PyProjects\\Map_building\\'
 lidar_angle = 240  # угол обзора лидара в градусах
 threshold = 0.125  # сколько обзора в доле с каждого края закрывается самим
