@@ -1,24 +1,12 @@
 import numpy as np
+import math
+import cv2
+from scipy import ndimage
 
-# arrayXY = np.ndarray(shape=(0,2), dtype=int)
-# print(arrayXY)
-# x=4
-# y=6
-# arrayXY = np.append(arrayXY, [[x, y]], axis = 0)
-# arrayXY = np.append(arrayXY, [[x, y]], axis = 0)
-#
-# print(arrayXY[:, 1])
+a = np.array(([1,1,0],
+                [1,1,1],
+                [1,1,2],
+                [1,1,3]))
 
-q = [1, 4, 5]
-o = np.array([1.0, 2.04, 3.0, 4.0, 5., 6., 7.0], float)
-
-
-def create_by_index(old):  # новый массив по индексам из старого
-    b = np.array([],float)
-    for ind in q:
-        b = np.append(b, [old[ind]])
-    return b
-
-
-w = create_by_index(o)
-print(w)
+print(ndimage.center_of_mass(a))
+imf=cv2.imread()
