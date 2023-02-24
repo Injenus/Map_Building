@@ -6,7 +6,7 @@ import os
 from PIL import Image
 import cv2
 
-data_path = 'examp14.txt'
+data_path = 'examp2.txt'
 main_dir = 'D:\\PyProjects\\Map_building\\'
 lidar_angle = 240  # угол обзора лидара в градусах
 threshold = 0.125  # сколько обзора в доле с каждого края закрывается самим
@@ -43,12 +43,6 @@ def create_by_index(old, mask):  # новый массив по индексам
     for ind in mask:
         b = np.append(b, [old[ind]])
     return b
-
-
-def rotation(x_old, y_old, angle):
-    x_new = x_old * math.cos(angle) + y_old * math.sin(angle)
-    y_new = y_old * math.cos(angle) - x_old * math.sin(angle)
-    return [x_new, y_new]
 
 
 g_center_bot = [df['X'].sum() / df.shape[0], df['Y'].sum() / df.shape[0]]
@@ -149,9 +143,10 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.plot(map_xy[:, 0], map_xy[:, 1], '.', color='m', label='Map', zorder=10)
 plt.plot(inf_xy[:, 0], inf_xy[:, 1], '.', color='y', label='INF')
+
+plt.plot(laser_xy[:, 0], laser_xy[:, 1], ':', color='c', label='Laser')
 plt.plot(interfer_xy[:, 0], interfer_xy[:, 1], '.', color='chocolate',
          label='Interferences')
-plt.plot(laser_xy[:, 0], laser_xy[:, 1], ':', color='c', label='Laser')
 plt.plot(lidar_xy[:, 0], lidar_xy[:, 1], '.', color='r',
          label='Lidar')  # лидар
 plt.plot(robot_xy[:, 0], robot_xy[:, 1], '.', color='k',
@@ -224,8 +219,9 @@ plt.xticks([])
 plt.yticks([])
 plt.xlim(g_center_turned[0] - 5.5, g_center_turned[0] + 5.5)
 plt.ylim(g_center_turned[1] - 5.5, g_center_turned[1] + 5.5)
-
 plt.savefig(main_dir + 'MAP_{}\\Map_RAW_turned.png'.format(data_path[:-4]),
             dpi=600)
+
+np.save(main_dir + 'MAP_{}\\Map_np_data'.format(data_path[:-4]), map_xy_turned)
 
 plt.show()
